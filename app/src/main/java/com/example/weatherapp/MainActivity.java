@@ -10,7 +10,6 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity{
 
     private static final String TAG = "MainActivity";
-    private static final String MAP_VIEW_KEY = "AIzaSyBGdSL7DR9473ORdJ2g_rA2rTm5Zlelp-E";
 
     //Mircea is driving
     @Override
@@ -22,7 +21,4 @@ public class MainActivity extends AppCompatActivity{
         startActivity(intent);
     }
 
-    public void SubmitAdress(){
-
-    }
 }

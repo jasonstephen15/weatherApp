@@ -10,9 +10,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -20,36 +24,33 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private GoogleMap gMap;
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
-        Toast.makeText(this, "Map is Ready", Toast.LENGTH_SHORT).show();
-        Log.d(TAG, "onMapReady: map is ready");
-        gMap = googleMap;
-    }
-
-    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+
+        initMap();
+    }
+
+    private LatLng sydney = new LatLng(-33.852, 151.211);
+    private LatLng austin = new LatLng(30.2672, -97.7431);
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        gMap = googleMap;
+
+        gMap.addMarker(new MarkerOptions().position(austin)
+                .title("Marker in Austin"));
+        gMap.moveCamera(CameraUpdateFactory.newLatLng(austin));
+    }
+
+    public void submitAddress(){
+        gMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 
     private void initMap(){
-        Log.d(TAG, "initMap: initializing map");
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
         mapFragment.getMapAsync(MapActivity.this);
     }
 
-    /*
-    private void getLocationPermission(){
-        String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION};
-
-        if(ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-            if(ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                    COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-
-            }
-        }
-    }*/
 }

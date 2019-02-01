@@ -3,8 +3,6 @@
     package="com.example.weatherapp" >
 
     <uses-permission android:name="android.permission.Internet"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACESS_NETWORK_STATE"/>
 
     <application
@@ -17,7 +15,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBGdSL7DR9473ORdJ2g_rA2rTm5Zlelp-E"/>
+            android:value="AIzaSyAMmMIo9BAYaSq4UxgyHSR_oL7SXILD598"/>
 
         <activity android:name=".MainActivity" >
             <intent-filter>
