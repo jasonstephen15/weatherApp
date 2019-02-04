@@ -9,8 +9,6 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity{
 
-    private static final String TAG = "MainActivity";
-
     //Mircea is driving
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -11,4 +11,5 @@
 .DS_Store
 /build
 /captures
+/app/manifests/AndroidManifest.xml
 .externalNativeBuild
