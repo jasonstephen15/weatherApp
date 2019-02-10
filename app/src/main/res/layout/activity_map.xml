@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -38,7 +37,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/buttonBackground"
+            android:textColor="#ffffff"
+            android:background="@color/textBackground"
             android:onClick="submitAddress"
             android:text="@string/SearchButton" />
 
@@ -47,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/enter_address" />
-            <!--android:background="@color/textBackground"-->
+        <!--android:background="@color/textBackground"-->
 
     </android.support.design.widget.TextInputLayout>
 
@@ -72,13 +72,19 @@
     </ScrollView>
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/weatherText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:text="TextView"
+        android:textSize="20sp"
+        android:textColor="#ffffff"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:background="@color/textBackground"
         app:layout_constraintStart_toStartOf="@+id/scrollView2"
         app:layout_constraintTop_toTopOf="@+id/scrollView2" />
 
