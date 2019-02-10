@@ -14,6 +14,11 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.android.gms.common.api.Response;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -22,7 +27,15 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONObject;
+
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 import java.util.Locale;
 
@@ -37,6 +50,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_map);
 
         initMap();
+
+
+        //
     }
 
     private LatLng sydney = new LatLng(-33.852, 151.211);
@@ -60,6 +76,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         TextView addressBar = (TextView) findViewById(R.id.addressText);
         String address = addressBar.getText().toString();
 
+        String latString;
+        String longiString;
+
         Geocoder geocoder = new Geocoder(this);
         gMap.clear();
 
@@ -72,15 +91,54 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             }
 
             LatLng coordinates = new LatLng(location.get(0).getLatitude(),location.get(0).getLongitude());
+            latString = ""+coordinates.latitude;
+            longiString = ""+coordinates.longitude;
+
             gMap.addMarker(new MarkerOptions().position(coordinates)
                   .title("You are here!"));
 
             gMap.moveCamera(CameraUpdateFactory.newLatLng(coordinates));
+
+
+            // Jason driving again
+
+            String base = "https://api.darksky.net/forecast/API_KEY/"; //37.8267,-122.4233
+            String url = base + latString + "," + longiString;
+            final String weatherInfo = "";
+
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                    (Request.Method.GET, url, null, new com.android.volley.Response.Listener<JSONObject>() {
+
+
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            System.out.println("Response: " + response.toString());
+                            weatherInfo = response.toString();
+                        }
+                    }, new com.android.volley.Response.ErrorListener() {
+
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            // TODO: Handle error
+
+                        }
+                    });
+
+            Volley.newRequestQueue(this).add(jsonObjectRequest);
+
+
+
         }
+
+
+        //Mircea drive
         catch(IOException e){
             Toast toast = Toast.makeText(this, "Invalid Address", Toast.LENGTH_SHORT);
             toast.show();
         }
+
+
+
     }
 
     private void initMap(){
