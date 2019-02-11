@@ -1,5 +1,6 @@
 package com.example.weatherapp;
 
+import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import android.view.inputmethod.InputMethodManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,26 +43,38 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         initMap();
 
 
-        //
+
     }
 
+    //Jason is Driving
     private LatLng sydney = new LatLng(-33.852, 151.211);
     private LatLng austin = new LatLng(30.2672, -97.7431);
+    private LatLng sanfran = new LatLng(37.7749,-122.4194);
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         gMap = googleMap;
 
+        gMap.moveCamera( CameraUpdateFactory.zoomTo(14.0f) );
+
+        //Mircea is driving
         //gMap.setMinZoomPreference(10);
-        gMap.addMarker(new MarkerOptions().position(austin)
+        gMap.addMarker(new MarkerOptions().position(sanfran)
                 .title("Marker in Austin"));
-        gMap.moveCamera(CameraUpdateFactory.newLatLng(austin));
+        gMap.moveCamera(CameraUpdateFactory.newLatLng(sanfran));
     }
 
     //Jason is driving
 
     public void submitAddress(View view){
         //gMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+
+        InputMethodManager inputManager = (InputMethodManager)
+                getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+                InputMethodManager.HIDE_NOT_ALWAYS);
 
         TextView addressBar = (TextView) findViewById(R.id.addressText);
         String address = addressBar.getText().toString();
@@ -81,7 +95,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
             LatLng coordinates = new LatLng(location.get(0).getLatitude(),location.get(0).getLongitude());
 
-            String DKKey = "35c9c0ca52bba848c40d88442d0a86f6";
             latString = "" + coordinates.latitude;
             longiString = "" + coordinates.longitude;
 
@@ -92,8 +105,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
             // Jason driving again
 
-            String base = "https://api.darksky.net/forecast/"; //37.8267,-122.4233
-            String url = base + DKKey + "/" + latString + "," + longiString;
+            String base = "https://api.darksky.net/forecast/API_KEY/"; //37.8267,-122.4233
+            String url = base + latString + "," + longiString;
 
 
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
@@ -115,10 +128,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                                         "Temperature: " + temperature + "\n" +
                                                 "Humidity: " + humidity + "\n" +
                                                 "Wind Speed: " + windSpeed + "\n" +
-                                                "Precipitation Intensity: " + precipitation;
+                                                "Precipitation: " + precipitation;
 
                                 TextView weatherT = (TextView) findViewById(R.id.weatherText);
                                 weatherT.setText(finalWeather);
+
+                                weatherT.setPadding(10,10,10,10);
 
                             } catch (JSONException e) {
                                 e.printStackTrace();

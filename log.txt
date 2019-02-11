@@ -1,0 +1,6 @@
+Log: 
+2/1, 7:00 - 9:00, Union, Jason and Mircea, 2 hrs
+2/3, 4:00 - 6:00, PCL, Jason and Mircea, 2 hrs
+2/8, 7:00 - 10:00, EERC lobby, Jason and Mircea, 3 hours
+2/10, 8:00 - 11:00, Union, Jason and Mircea, 3 hours
+total time 10 hours of pair programming
