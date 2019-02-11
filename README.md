@@ -4,9 +4,9 @@
 
 ---
 
-### User Stories
+Displays current weather conditions (temperature, humidity, wind speed, precipitation) of a location (specified as a string containing an address) entered by the user, and shows that location on a map.
 
-#### Skills
+#### Software
 - [x] Interfaced with Google Cloud Platform.
 - [x] Implemented Google's Geocoding Maps API.
 - [x] Implemented Dark Sky API.
