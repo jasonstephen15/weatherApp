@@ -15,5 +15,3 @@ Displays current weather conditions (temperature, humidity, wind speed, precipit
 
 <img src="http://g.recordit.co/nhljgUPFXv.gif" width=250><br>
 
-### Notes
-Describe any challenges encountered while building the app.
